@@ -3,7 +3,7 @@
 #include <string.h>
 #include "calc.h"
 
-//argv[2][0] OR *argv[2]
+//using argv[2][0] or *argv[2] is the same
 
 int main(int argc, char **argv) {
 	int num1, num2;
