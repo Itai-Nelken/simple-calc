@@ -1,6 +1,7 @@
 SIMPLE CALC
 ===========
-simple-calc by Itai-Nelken.
+MIT License
+Copyright (c) 2021 Itai Nelken
 
 compiling, installing, & uninstalling:
 ---------------------------------------
