@@ -26,14 +26,19 @@ void calculate(GtkWidget *widget, gpointer data) {
     printf("[STATUS] operation: %c\nnum1: %lld\nnum2: %lld\n", operation, num1, num2);
 #endif
     if(num1&&num2&&operation) {
-        if(operation=='+') {
-            result=num1+num2;
-        } else if(operation=='-') {
-            result=num1-num2;
-        } else if(operation=='*') {
-            result=num1*num2;
-        } else if(operation=='/') {
-            result=num1/num2;
+        switch(operation) {
+            case '+':
+                result=num1+num2;
+                break;
+            case '-':
+                result=num1-num2;
+                break;
+            case '*':
+                result=num1*num2;
+                break;
+            case '/':
+                result=num1/num2;
+                break;
         }
         sprintf(buffer, "%lld", result);
 #ifdef DEBUG
@@ -46,7 +51,7 @@ void calculate(GtkWidget *widget, gpointer data) {
 }
 
 void on_num_btn_click(GtkWidget *widget, gpointer data) {
-    int btn=(int)data;
+    int btn=(intptr_t)data;
     char buffer[10];
     const char *entry_text=gtk_entry_get_text(GTK_ENTRY(entryp));
     sprintf(buffer, "%s%d", entry_text, button[btn].num);
@@ -57,7 +62,7 @@ void on_num_btn_click(GtkWidget *widget, gpointer data) {
 }
 
 void on_operation_btn_click(GtkWidget *widget, gpointer data) {
-    int btn=(int)data;
+    int btn=(intptr_t)data;
     operation=button[btn].operation;
     const char *entry_text=gtk_entry_get_text(GTK_ENTRY(entryp));
     num1=atoi(entry_text);
@@ -164,21 +169,21 @@ int main(int argc, char **argv) {
 #else
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 #endif
-    g_signal_connect(btn0, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)button[0].num);
-    g_signal_connect(btn1, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)button[1].num);
-    g_signal_connect(btn2, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)button[2].num);
-    g_signal_connect(btn3, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)button[3].num);
-    g_signal_connect(btn4, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)button[4].num);
-    g_signal_connect(btn5, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)button[5].num);
-    g_signal_connect(btn6, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)button[6].num);
-    g_signal_connect(btn7, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)button[7].num);
-    g_signal_connect(btn8, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)button[8].num);
-    g_signal_connect(btn9, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)button[9].num);
-    g_signal_connect(btnadd, "clicked", G_CALLBACK(on_operation_btn_click), (gpointer)button[11].num);
-    g_signal_connect(btnsub, "clicked", G_CALLBACK(on_operation_btn_click), (gpointer)button[12].num);
-    g_signal_connect(btndiv, "clicked", G_CALLBACK(on_operation_btn_click), (gpointer)button[13].num);
-    g_signal_connect(btnmul, "clicked", G_CALLBACK(on_operation_btn_click), (gpointer)button[14].num);
-    g_signal_connect(btneq, "clicked", G_CALLBACK(calculate), (gpointer)button[15].num);
+    g_signal_connect(btn1, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)(intptr_t)button[1].num);
+    g_signal_connect(btn2, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)(intptr_t)button[2].num);
+    g_signal_connect(btn3, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)(intptr_t)button[3].num);
+    g_signal_connect(btn4, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)(intptr_t)button[4].num);
+    g_signal_connect(btn5, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)(intptr_t)button[5].num);
+    g_signal_connect(btn6, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)(intptr_t)button[6].num);
+    g_signal_connect(btn0, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)(intptr_t)button[0].num);
+    g_signal_connect(btn7, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)(intptr_t)button[7].num);
+    g_signal_connect(btn8, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)(intptr_t)button[8].num);
+    g_signal_connect(btn9, "clicked", G_CALLBACK(on_num_btn_click), (gpointer)(intptr_t)button[9].num);
+    g_signal_connect(btnadd, "clicked", G_CALLBACK(on_operation_btn_click), (gpointer)(intptr_t)button[11].num);
+    g_signal_connect(btnsub, "clicked", G_CALLBACK(on_operation_btn_click), (gpointer)(intptr_t)button[12].num);
+    g_signal_connect(btndiv, "clicked", G_CALLBACK(on_operation_btn_click), (gpointer)(intptr_t)button[13].num);
+    g_signal_connect(btnmul, "clicked", G_CALLBACK(on_operation_btn_click), (gpointer)(intptr_t)button[14].num);
+    g_signal_connect(btneq, "clicked", G_CALLBACK(calculate), (gpointer)(intptr_t)button[15].num);
     g_signal_connect(btnAC, "clicked", G_CALLBACK(on_AC_btn_click), NULL);
 
     gtk_widget_show_all(GTK_WIDGET(window));
