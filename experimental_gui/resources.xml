@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <gresources>
 	<gresource prefix="/calc">
 		<file preprocess="xml-stripblanks">res/calc.ui</file>
