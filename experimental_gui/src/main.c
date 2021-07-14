@@ -100,26 +100,34 @@ int main(int argc, char **argv) {
 #endif
     GObject *window, *btnAC, *btnadd, *btnsub, *btndiv, *btnmul, *btneq, *btn0, *btn1, *btn2, *btn3, *btn4, *btn5, *btn6, *btn7, *btn8, *btn9, *entry;
     GtkBuilder *builder;
+
+#ifdef USE_UI_FILE
     GError *error=NULL;
-#ifdef DEBUG
-    printf("[INIT] getting UI file location\n");
-#endif
+    #ifdef DEBUG
+        printf("[INIT] getting UI file location\n");
+    #endif
     char *ui_path="../res/calc.ui";
+#endif
 
 #ifdef DEBUG
     printf("[INIT] initializing GTK\n");
 #endif
     gtk_init(&argc, &argv);
 
-#ifdef DEBUG
-    printf("[INIT] loading UI file\n");
-#endif
+#ifndef USE_UI_FILE
+    builder=gtk_builder_new_from_resource("/calc/res/calc.ui");
+#else
+    #ifdef DEBUG
+        printf("[INIT] loading UI file\n");
+    #endif
     builder=gtk_builder_new();
     if(!gtk_builder_add_from_file(builder, ui_path, &error)) {
         g_printerr("\e[1;31mError loading UI file:\e[0;31m %s\e[0m\n", error->message);
         g_clear_error(&error);
         return 1;
     }
+#endif
+
 #ifdef DEBUG
     printf("[INIT] loading UI objects\n");
 #endif

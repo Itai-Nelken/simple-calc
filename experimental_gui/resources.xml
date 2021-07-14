@@ -1,0 +1,5 @@
+<gresources>
+	<gresource prefix="/calc">
+		<file preprocess="xml-stripblanks">res/calc.ui</file>
+	</gresource>
+</gresources>
